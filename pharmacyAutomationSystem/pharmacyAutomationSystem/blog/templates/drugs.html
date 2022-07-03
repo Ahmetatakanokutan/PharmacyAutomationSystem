@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <h3>Drugs</h3>
+            <hr>
+            </div>
+        </div>
+</div>
+<div class ="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <form>
+                 {% csrf_token %} 
+                <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Search...">
+              <button type="submit" class="btn btn-danger">Search</button>
+            </form>
+      </div>
+    </div>
+
+</div>
+{% if drugs %}
+
+{% for drug in drugs %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <a href="{% url 'drug:detail' drug.id %}">
+                <h2 class="mt-4">{{drug.title}}</h2>
+            </a>            
+
+
+            <!-- Preview Image -->
+            {% if drug.drug_image %}
+            <a href="{% url 'drug:detail' drug.id %}"><img class="img-fluid rounded" src="{{drug.drug_image.url}}" width="600" height="600" alt=""></a>  
+
+            {% endif %}
+            <hr>
+
+            <a style="float:right;" href="{% url 'drug:detail' drug.id %}" class="btn btn-danger">View</a>
+            <hr>
+
+        </div>
+     </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <div class ="row">
+        <div class="col-md-10 offset-md-3">
+            <div class="col-lg-8">
+                <div class="alert alert-danger">
+                    No Drug Found.
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock body %}

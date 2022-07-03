@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+      <!-- Title -->
+      <h3 class="mt-4">{{drug.title}}</h3>
+
+      <hr>
+
+      <!-- Date/Time -->
+      <p>{{drug.created_date}}</p>
+
+      <hr>
+
+      <!-- Preview Image -->
+      {% if drug.drug_image %}
+      <img class="img-fluid rounded" src="{{drug.drug_image.url}}" width='500' height='500' alt=""> 
+
+      {% endif %}   
+      
+
+      <hr>
+
+
+      <h4>Drug Information:</h4> 
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{drug.id}}</th>
+            <td><a>{{drug.stock}}</a></td>
+            <td><a>{{drug.quantity}}</a></td>
+            <td><a>{{drug.price}}</a></td>
+          </tr>
+      
+        </tbody>
+      </table>
+{% endblock body %}

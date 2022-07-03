@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>Drug List</h3>
+
+<a class="btn btn-danger" href="{% url 'drug:adddrug' %}">Add drug</a>
+<hr>
+{% if drugs %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for drug in drugs %}
+    <tr>
+      <th scope="row">{{drug.id}}</th>
+      <td><a href="{% url 'drug:detail' drug.id %}">{{drug.title}}</a></td>
+      <td><a>{{drug.stock}}</a></td>
+      <td><a>{{drug.quantity}}</a></td>
+      <td><a>{{drug.price}}</a></td>
+      <td><a href="{% url 'drug:update' drug.id %}" class="btn btn-danger">Update</a></td>
+      <td><a href="{% url 'drug:delete' drug.id %}" class="btn btn-danger">Delete</a></td>
+    </tr>
+
+    {% endfor %}
+    <!---<tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>-->
+
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger">
+  You don't have drug yet...
+
+</div>
+{% endif %}
+
+{% endblock body  %}
